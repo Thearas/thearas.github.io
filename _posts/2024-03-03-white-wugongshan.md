@@ -50,13 +50,13 @@ header:
 
 ![云海](/assets/images/wugongshan/4.jpg){: width="500" }
 
-最后在山顶客栈住了一晚，晚上的外面温度估摸着有 -8 度，我们只能在屋里玩儿狼人杀，不过也是很开心的。
+晚上在山顶客栈住，外面估摸着有 -8 度，我们只能在屋里玩儿狼人杀，不过也是很开心的。
 
 （遇到了个很漂亮的小姐姐，是我在户外见过唯一留着美甲还化妆的，太猛了真的）
 
 ## Day 2
 
-今天阴天，雾气更大了，跟昨晚狼人杀的小伙伴们一起出发去金顶，队伍壮大到得有快 30 人，拉得很长，有种冰雪长征感觉：
+今天阴天，雾气更大了，跟昨晚狼人杀的小伙伴们一起出发去最高的金顶，队伍壮大到得有快 30 人，拉得很长，有种冰雪长征感觉：
 
 ![冰雪徒步](/assets/images/wugongshan/1000247.jpg){: width="500" }
 
@@ -72,19 +72,19 @@ header:
 
 ![金顶](/assets/images/wugongshan/3.jpg){: width="300" }
 
-下到半山腰有雪了，而且不像山顶只有草，还有圣诞树：
+下到半山腰又有雪了，而且不像山顶只有草，还有圣诞树：
 
 ![圣诞树](/assets/images/wugongshan/1000351.jpg){: width="500" }
 
-## 摄影
+## 末
 
-<sup><sub>作为一个原教旨摄影师，本文所有图都是直出，部分 HDR 合成，裁都不裁，色都不调，其实就是懒</sub></sup>
+这次没看到滚滚云海有点可惜，夏天再约！
 
-老法师的参数就是好用，推荐下：
+以后徒步都带着相机，等我老了回来看（
 
-<div class="responsive-video-container">
-    <iframe src="//player.bilibili.com/player.html?bvid=BV1ev411z7PG&as_wide=0&high_quality=1&autoplay=0" framespacing="0" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"> </iframe>
-</div>
+### 关于摄影
+
+<sup><sub>作为一个原教旨新手，本文所有图都是直出，部分 HDR 合成，裁都不裁，色都不调，其实是懒</sub></sup>
 
 不多说了，直接献丑：
 
@@ -96,6 +96,8 @@ header:
 <sub>这山长得真牛逼</sub>
 {: style="text-align: center;"}
 
-## 末
+最后推荐下老法师的参数：
 
-这次没看到滚滚云海有点可惜，夏天再约！
+<div class="responsive-video-container">
+    <iframe src="//player.bilibili.com/player.html?bvid=BV1ev411z7PG&as_wide=0&high_quality=1&autoplay=0" framespacing="0" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"> </iframe>
+</div>
