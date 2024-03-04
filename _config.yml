@@ -8,7 +8,8 @@ title: Thearas's Blog
 title_separator: "-"
 name: Thearas
 description: 日常 / 旅行 / 技术
-repository: Thearas/thearas.github.io
+repository: thearas/thearas.github.io
+url: https://thearas.github.io
 logo: /assets/images/logo.png
 # masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
@@ -32,6 +33,16 @@ analytics:
   google:
     tracking_id:
     anonymize_ip: # true, false (default)
+
+comments:
+  provider: giscus
+  giscus:
+    repo_id: "MDEwOlJlcG9zaXRvcnkyODE0MDMxMjQ="
+    category_name: "Announcements"
+    category_id: "DIC_kwDOEMXe9M4CdtMV"
+    discussion_term: "pathname"
+    reactions_enabled: "1"
+    theme: "dark"
 
 # Site Author
 author:
@@ -172,3 +183,4 @@ defaults:
       related: true
       show_date: true
       show_tags: true
+      comments: true
