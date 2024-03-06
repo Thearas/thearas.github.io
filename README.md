@@ -21,4 +21,5 @@
     make index
     ```
 
-    The just push to GitHub.
+    Then just push the changes to GitHub.
+
