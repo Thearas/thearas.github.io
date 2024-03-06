@@ -13,6 +13,7 @@ gem "minimal-mistakes-jekyll", "~> 4.24.0"
 gem "github-pages", group: :jekyll_plugins
 gem 'jekyll-target-blank', group: :jekyll_plugins
 gem 'faraday-retry', group: :jekyll_plugins
-# gem 'jekyll-archives', group: :jekyll_plugins
+gem 'jekyll-algolia', group: :jekyll_plugins
+gem 'jekyll-archives', group: :jekyll_plugins
 
 gem "webrick", "~> 1.8"

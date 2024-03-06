@@ -18,9 +18,13 @@ atom_feed:
   path: # blank (default) uses feed.xml
   hide: # true, false (default)
 search: true
-search_provider: lunr
-lunr:
-  search_within_pages: true
+search_provider: algolia
+# https://github.com/mmistakes/minimal-mistakes/blob/master/docs/_docs/05-configuration.md#algolia
+algolia:
+  application_id: 0YGSY1VHD1 # YOUR_APPLICATION_ID
+  index_name: my_blog # YOUR_INDEX_NAME
+  search_only_api_key: 01861cd251cf13a129f9129ce3323f97 # YOUR_SEARCH_ONLY_API_KEY
+  powered_by: false # true (default), false
 
 # Social Sharing
 twitter:
