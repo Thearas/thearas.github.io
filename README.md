@@ -1,5 +1,11 @@
 # My blog
 
+## Prerequisites
+
+```bash
+make init
+```
+
 ## Build
 
 1. Install dependencies
@@ -19,7 +25,9 @@
     ```bash
     # update search index, `$ALGOLIA_API_KEY` should be in `~/.zshrc`
     make index
+
+    # optimize images
+    make image
     ```
 
     Then just push the changes to GitHub.
-
