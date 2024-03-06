@@ -46,33 +46,32 @@ main(){
     echo "$img: $width x $height, $quality, $interlace, $format, $class"
 
     img_tmp="${img}.new"
-    png_interlace=0
+    force_convert=0
 
     # 1. pngquant. Optimize for PNG.
     if [ "$format" == "PNG" ] && [[ "$class" != "PseudoClass"* ]]; then
         echo "pngquant --force --skip-if-larger --quality '80-90' --speed 1 --output $img_tmp -- $img"
         pngquant --force --skip-if-larger --quality '80-90' --speed 1 --output "$img_tmp" -- "$img"
         delete_if_larger "$img_tmp" 0
-        png_interlace=1
+        force_convert=1
     fi
 
     # 2. Imagemagick. Resize and optimize the image to progressive image.
     args=''
-    force_convert=0
     if ((smallest_dimension > 1920)); then
         args="$args -resize $(((1920 * 100) / smallest_dimension))%"
     fi
-    if ((quality > 94)) && [ "$format" != "png" ]; then
-        args='-quality 85'
+    if ((quality > 88)) && [ "$format" != "PNG" ]; then
+        args='-quality 80'
     fi
-    if [[ "$interlace" == "None" || "$png_interlace" == "1" ]]; then
-        args="$args -interlace Plane"
+    if [[ "$interlace" == "None" ]]; then
         force_convert=1
     fi
 
-    if [ -n "$args" ]; then
-        echo "convert $img -strip -auto-level -auto-orient $args $img_tmp"
-        convert "$img" -strip -auto-level -auto-orient $args "$img_tmp"
+    if [ -n "$args" ] || [ "$force_convert" == "1" ]; then
+        args="-strip -enhance -auto-level -auto-orient -interlace Plane $args"
+        echo "convert $img $args $img_tmp"
+        convert "$img" $args "$img_tmp"
         delete_if_larger "$img_tmp" $force_convert
         printf "\n"
     fi
