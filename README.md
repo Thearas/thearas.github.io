@@ -27,7 +27,7 @@ make init
     make index
 
     # optimize images
-    make image
+    make optimize_images
     ```
 
     Then just push the changes to GitHub.

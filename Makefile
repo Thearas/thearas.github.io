@@ -1,10 +1,8 @@
 MAKEFLAGS += --always-make
 
 init:
-#	npm install thumbhash
-#	go install github.com/fogleman/primitive@latest
-	brew install imagemagick
-	brew reinstall pngquant
+	pip3 install thumbhash-python
+	brew install imagemagick pngquant yq
 
 install:
 	bundle
@@ -18,5 +16,5 @@ run-prod:
 index:
 	ALGOLIA_API_KEY=$(ALGOLIA_API_KEY) bundle exec jekyll algolia
 
-image:
+optimize_images:
 	bash optimize_images.sh

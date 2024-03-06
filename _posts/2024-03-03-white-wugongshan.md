@@ -17,7 +17,7 @@ header:
 第二天 好汉坡-绝望坡-观音宕-吊马桩-金顶-石鼓寺
 ```
 
-{% include img.html src="wugongshan/1000160.jpg" alt="上海的小伙伴" width="500" %}
+{% include img.html src="wugongshan/1000160.jpg" alt="上海的小伙伴" %}
 
 ## Day 1
 
@@ -30,9 +30,9 @@ header:
 
 不被打扰的雪凝结成了冰晶，未开春的树枝上、刚准备盛放的花朵上、被风吹歪但没缓过神来的树叶上都有。
 
-{% include img.html src="wugongshan/1000175.jpg" alt="树枝上的冰晶" width="500" %}
-{% include img.html src="wugongshan/1000359.jpg" alt="花朵上的冰晶" width="500" %}
-{% include img.html src="wugongshan/1000363.jpg" alt="树叶上的冰晶" width="500" %}
+{% include img.html src="wugongshan/1000175.jpg" alt="树枝上的冰晶" width="50%" %}
+{% include img.html src="wugongshan/1000359.jpg" alt="花朵上的冰晶" width="50%" %}
+{% include img.html src="wugongshan/1000363.jpg" alt="树叶上的冰晶" width="50%" %}
 
 感慨这波冷气真会挑时候，骗了多少植物（笑）。
 
@@ -40,15 +40,15 @@ header:
 
 不一会儿，也就差不多 5 个小时而已，我们爬到了绝望坡，这里在夏天是高山草甸，冬天则是漫山遍野的棒棒冰：
 
-{% include img.html src="wugongshan/1000221.jpg" alt="漫山遍野的棒棒冰" width="500" %}
+{% include img.html src="wugongshan/1000221.jpg" alt="漫山遍野的棒棒冰" width="50%" shape="narrow" %}
 
 给大家拍张合照：
 
-{% include img.html src="wugongshan/1000297.jpg" alt="合照" width="500" %}
+{% include img.html src="wugongshan/1000297.jpg" alt="合照" width="50%" shape="narrow" %}
 
 武功山海拔不高，但山上的云海雪景太美。
 
-{% include img.html src="wugongshan/4.jpg" alt="云海" width="500" %}
+{% include img.html src="wugongshan/4.jpg" alt="云海" %}
 
 晚上在山顶客栈住，外面估摸着有 -8 度，我们只能在屋里玩儿狼人杀，不过也是很开心的。
 
@@ -58,23 +58,23 @@ header:
 
 今天阴天，雾气更大了，跟昨晚狼人杀的小伙伴们一起出发去最高的金顶，队伍壮大到得有快 30 人，拉得很长，有种冰雪长征感觉：
 
-{% include img.html src="wugongshan/1000247.jpg" alt="冰雪徒步" width="500" %}
+{% include img.html src="wugongshan/1000247.jpg" alt="冰雪徒步" %}
 
 奇怪的是，越靠近最高的金顶，反而越没雪了，都是雾：
 
-{% include img.html src="wugongshan/1.jpg" alt="接近金顶" width="500" %}
+{% include img.html src="wugongshan/1.jpg" alt="接近金顶" width="50%" shape="narrow" %}
 
 最终，在领队的鼓励下，我倒数第二个登上了金顶，莫名想穿这件衣服给后面的老哥看（太坏了）：
 
-{% include img.html src="wugongshan/IMG_3157.jpg" alt="太坏了这衣服" width="300" %}
+{% include img.html src="wugongshan/IMG_3157.jpg" alt="太坏了这衣服" width="300px" %}
 
 顶上雾气和风很大，完全没雪了，也没有云海，所以只拍了张石碑，略感可惜：
 
-{% include img.html src="wugongshan/3.jpg" alt="金顶" width="300" %}
+{% include img.html src="wugongshan/3.jpg" alt="金顶" width="300px" shape="narrow" %}
 
 下到半山腰又有雪了，而且不像山顶只有草，还有圣诞树：
 
-{% include img.html src="wugongshan/1000351.jpg" alt="圣诞树" width="500" %}
+{% include img.html src="wugongshan/1000351.jpg" alt="圣诞树" width="50%" %}
 
 ## 末
 
