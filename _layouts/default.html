@@ -13,9 +13,8 @@
     {% include head.html %}
     {% include head/custom.html %}
 
-    <script src="{{ '/assets/js/lazysizes/lazysizes.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/lazysizes/ls.progressive.min.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/lazysizes/ls.object-fit.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/lazysizes/lazysizes.min.js' | relative_url }}"></script>
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
