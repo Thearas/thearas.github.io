@@ -4,7 +4,7 @@
     <div class="group-item" style="width: {{ include.width | default: '100%' }};height: {{ include.height | default: 'auto' }};">
       <div class="imagecontainer is-contain {% if include.shape %} {{include.shape}} {% endif %}" >
         <noscript><img src="{{img_src | relative_url}}" alt="{{include.alt | default: ''}}" title="{{include.title | default: include.alt}}" {% if include.width %} width="{{include.width}}" {% endif %} class="{{include.class | default: ''}}" /></noscript>
-        <img data-src="{{img_src | relative_url}}" {% if site.data.thumbhash[include.src] %} src="data:image/png;base64,{{site.data.thumbhash[include.src]}}" {% endif %} alt="{{include.alt | default: ''}}" title="{{include.title | default: include.alt}}" onclick="window.open(this.src)" class="imagecontainer-img lazyload {{include.class | default: ''}}" />
+        <img data-src="{{img_src | relative_url}}" alt="{{include.alt | default: ''}}" title="{{include.title | default: include.alt}}" onclick="window.open(this.src)" {% if site.data.thumbhash[include.src] %} src="data:image/png;base64,{{site.data.thumbhash[include.src]}}" {% endif %} class="imagecontainer-img lazyload {{include.class | default: ''}}" />
       </div>
     </div>
   </div>
