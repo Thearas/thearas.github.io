@@ -17,7 +17,9 @@ make init
 2. Run
 
     ```bash
-    make run # or `make run-prod` for production
+    npm run build:js # if you modified the `assets/js/_main.js`
+
+    make run
     ```
 
 3. Publish
