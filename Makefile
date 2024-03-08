@@ -2,7 +2,7 @@ MAKEFLAGS += --always-make
 ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 
 init:
-	pip3 install thumbhash-python
+	pip install git+https:////github.com/Thearas/thumbhash-python.git
 	brew install imagemagick pngquant yq
 
 install:
@@ -11,13 +11,10 @@ install:
 run:
 	bundle exec jekyll serve
 
-run-prod:
-	JEKYLL_ENV=production bundle exec jekyll serve
-
 index:
 	ALGOLIA_API_KEY=$(ALGOLIA_API_KEY) bundle exec jekyll algolia
 
-# ENV: OUTPUT_FMT
+# ENV: OUTPUT_FMT, RESIZE
 optimize_images:
 	bash optimize_images.sh $(ARGS)
 

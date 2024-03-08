@@ -8,6 +8,7 @@ image_dir="${1:-$base_image_dir}"
 [[ "$image_dir" == "$base_image_dir"* ]] || exit 1 # exit if image_dir is not a child of base_image_dir
 
 # Environments:
+resize="$RESIZE"
 output_ext=""
 if [ -n "$OUTPUT_FMT" ]; then
     output_ext=".$(echo $OUTPUT_FMT | tr '[:upper:]' '[:lower:]')"
@@ -97,7 +98,9 @@ opt_main() {
 
     # 2. Imagemagick. Resize and optimize the image to progressive image.
     args=''
-    if ((smallest_dimension > 1920)); then
+    if [ -n "$resize" ]; then
+        args="$args -resize $resize"
+    elif ((smallest_dimension > 1920)); then
         args="$args -resize $(((1920 * 100) / smallest_dimension))%"
     fi
     if ((quality > 88)) && [ "$format" != "PNG" ]; then
