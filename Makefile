@@ -1,4 +1,5 @@
 MAKEFLAGS += --always-make
+ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 
 init:
 	pip3 install thumbhash-python
@@ -16,5 +17,9 @@ run-prod:
 index:
 	ALGOLIA_API_KEY=$(ALGOLIA_API_KEY) bundle exec jekyll algolia
 
+# ENV: OUTPUT_FMT
 optimize_images:
-	bash optimize_images.sh
+	bash optimize_images.sh $(ARGS)
+
+%:
+	@:

@@ -29,7 +29,7 @@ make init
     make index
 
     # optimize images
-    make optimize_images
+    make optimize_images -- assets/images/<new image dir>
     ```
 
     Then just push the changes to GitHub.

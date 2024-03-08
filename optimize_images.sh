@@ -2,11 +2,23 @@
 
 set -e
 
+# ARGS:
 base_image_dir="assets/images/"
 image_dir="${1:-$base_image_dir}"
-no_opt_size_kb=100
-force_thumbhash="$FORCE_THUMBHASH"
+[[ "$image_dir" == "$base_image_dir"* ]] || exit 1 # exit if image_dir is not a child of base_image_dir
 
+# Environments:
+output_ext=""
+if [ -n "$OUTPUT_FMT" ]; then
+    output_ext=".$(echo $OUTPUT_FMT | tr '[:upper:]' '[:lower:]')"
+fi
+
+# Constants:
+no_opt_size_kb=50
+no_thumb_size_kb=100
+thumbhash_file="_data/thumbhash.yml"
+
+# Variables:
 img=""
 converted=0
 img_size_kb=0
@@ -68,11 +80,11 @@ opt_main() {
     fetch_metadata
     echo "$img: $width x $height, $quality, $interlace, $format, $class"
 
-    local img_tmp="${img}.tmp"
-    local force_imagemagick=0
+    local img_tmp="${img}.tmp$output_ext"
+    local force_imagemagick=1
 
     # 1. pngquant. Optimize for PNG.
-    if [ "$format" == "PNG" ] && [[ "$class" != "PseudoClass"* ]]; then
+    if [ "$format" == "PNG" ] && [[ "$class" != "PseudoClass"* ]] && [[ -z "$output_ext" || "$output_ext" == ".png" ]]; then
         local args="--force --skip-if-larger --quality 80-90 --speed 1 --output $img_tmp -- $img"
         echo "pngquant $args"
         pngquant $args
@@ -91,7 +103,7 @@ opt_main() {
     if ((quality > 88)) && [ "$format" != "PNG" ]; then
         args='-quality 80'
     fi
-    if [[ "$interlace" == "None" ]]; then
+    if [[ "$interlace" == "None" ]] && [[ -z "$output_ext" ]]; then
         force_imagemagick=1
     fi
     if [ -n "$args" ] || [ $force_imagemagick -eq 1 ]; then
@@ -101,14 +113,16 @@ opt_main() {
         post_converted "$img_tmp" $force_imagemagick
     fi
 
-    if [ $converted -eq 1 ] || [ -n "$force_thumbhash" ]; then
+    if [ $converted -eq 1 ] && (( new_img_size_kb > no_thumb_size_kb )); then
         calculate_thumbhash
         printf "\n"
     fi
 }
 
 main() {
-    local all_images=($(fd -tf "" $image_dir))
+    local all_images=("$image_dir")
+    [ -d "$image_dir" ] && all_images=($(fd -tf "" $image_dir))
+
     for image in "${all_images[@]}"; do
         img=$image
         converted=0
@@ -116,7 +130,7 @@ main() {
     done
 
     if [ "$yq_thumbhash" != "." ]; then
-        yml="_data/thumbhash.yml"
+        yml=$thumbhash_file
 
         echo "Updating thumbhash to $yml"
         yq "$yq_thumbhash" "$yml" >"$yml.tmp"
