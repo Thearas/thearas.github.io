@@ -2,7 +2,7 @@
 layout: posts
 categories: 技术
 title: Image loading optimization for Jekyll and GitHub Page 
-excerpt: 总听前端同学自嘲切图仔，这次我也当一回
+excerpt: 常听前端同学自嘲切图仔，这次我也当一回
 header:
   overlay_image: /assets/images/image-optimization/Lenna.png
   caption: "图 \\| [Lenna](https://en.wikipedia.org/wiki/Lenna)"
@@ -17,11 +17,12 @@ Jekyll 生成的静态网页能免费地在 GitHub Page 上部署，但图片加
 1. [转换格式](#转换格式)
     1. [WebP](#webp)
     2. [JPEG 或 PNG](#jpeg-或-png)（渐进式）
-2. [缩小尺寸和质量](#缩小尺寸和质量)
+2. [缩小尺寸和质量](#缩小尺寸和质量) 和 [PNG 有损压缩](#png-有损压缩)
 3. [图片懒加载](#图片懒加载)
 4. [先展示 Base64 缩略图](#先展示-base64-缩略图)
 5. [渐进式加载](#渐进式加载)
 6. [其他优化](#其他优化)
+7. [查看效果](#查看效果) 和 [Lighthouse](#lighthouse)
 
 本文的逻辑我写成了 Bash 脚本，你可以在[这里](https://github.com/Thearas/thearas.github.io/blob/f3271cb30be84b3a54730793bb6708739316e852/optimize_images.sh#L65)找到。
 
@@ -92,6 +93,26 @@ if [ -n "$args" ]； then
 fi
 ```
 
+#### PNG 有损压缩
+
+PNG 有损压缩是把 PNG 图片转成 Palette PNG。我用的是 [pngquant](https://pngquant.org)，摘抄简介：
+
+> Imagequant library converts RGBA images to palette-based 8-bit indexed images, including alpha component. It's ideal for generating tiny PNG images and nice-looking GIFs.
+
+[pngquant](https://pngquant.org) 本身就是命令行工具，可以这么用：
+
+```bash
+class=$(identify -ping -format "%m,%r" '<orig-img>' | tr ',' '\n')
+format=${metadata[0]}
+class=${metadata[1]}
+
+# 如果是 PNG 且不是 PseudoClass（colormapped）就压缩
+if [ "$format" == "PNG" ] && [[ "$class" != "PseudoClass"* ]]; then
+    # 把质量压缩到 '80-90'
+    pngquant --force --skip-if-larger --quality 80-90 --speed 1 --output '<dest-img>' -- '<orig-img>'
+fi
+```
+
 <br/>
 
 ### 图片懒加载
@@ -137,6 +158,10 @@ fi
 
 看过 [白色武功山](https://thearas.github.io/%E6%97%85%E8%A1%8C/white-wugongshan) 的朋友可能注意到：先看到的是非常模糊的图片，等一会儿真正的图片才开始刷新。这是因为我用 [thumbhash-python](https://github.com/Thearas/thumbhash-python) 生成了 PNG 缩略图的 Base64，并直接嵌入进 HTML 里，所以缩略图是不需要额外请求、瞬间就能看到的。
 
+效果如图：
+
+{%- include img.html src="image-optimization/pg_0.png" alt="缩略图效果" width="300px" -%}
+
 要实现这点分两步：
 
 1. 生成缩略图的 Base64，并保存在 `_data/thumbhash.yml` 文件中
@@ -164,7 +189,7 @@ fi
 
 ### 渐进式加载
 
-渐进式加载是指图片一点一点地加载，而不是一下子就出现。这样用户就能看到图片的大概样子，而不是一片空白。上面说到过，这个特性在 JPEG 和 PNG 中都有，但在 WebP 中没有。
+渐进式加载是指图片一点一点地从模糊到清晰。这样用户就能看到图片的大概样子，而不是一片空白。上面说到过，这个特性在 JPEG 和 PNG 中都有，但在 WebP 中没有。
 
 不过仍然有可以优化的，那就是「Base64 缩略图」和「原图」间的渐进式过渡。我在 [白色武功山](https://thearas.github.io/%E6%97%85%E8%A1%8C/white-wugongshan) 中的图片就是这样做的，先展示 Base64 缩略图作为背景，等真正图片加载时一点点替换。
 
@@ -172,12 +197,14 @@ fi
 
 <table>
     <thead>
+        <th>先展示缩略图</th>
         <th>原图逐渐替换缩略图</th>
         <th>原图逐渐清晰</th>
         <th>原图加载完毕</th>
     </thead>
     <tbody>
         <tr>
+            <td>{%- include img.html src="image-optimization/pg_0.png" alt="刚开始" width="200px" -%}</td>
             <td>{%- include img.html src="image-optimization/pg_1.jpg" alt="一阶段" width="200px" -%}</td>
             <td>{%- include img.html src="image-optimization/pg_2.jpg" alt="二阶段" width="200px" -%}</td>
             <td>{%- include img.html src="image-optimization/pg_3.jpg" alt="三阶段" width="200px" -%}</td>
@@ -198,6 +225,29 @@ fi
 - `-strip` 和 `-auto-orient`: 一定要同时使用，前者去掉图片的 Exif 信息，后者根据图片的 Exif 信息自动旋转图片，不加 `-auto-orient` 会导致图片角度错误，比如相机竖排的图可能会转个 90°
 - `-enhance`: Apply a digital filter to enhance a noisy image
 - `-auto-level`: Automagically adjust color levels of image
+
+<br/>
+
+### 查看效果
+
+用 Chrome 模拟手机 3G 网，看图片优化是否生效。
+
+1. 选择屏幕大小，切换到手机屏
+2. 选择 「Network」，之后看加载效果
+3. 在网络中选择「Disable cache」
+4. 在网络中选择「Fast 3G」
+
+{%- include img.html src="image-optimization/chrome_debug.png" alt="用 Chrome 查看效果" width="500px" -%}
+
+#### Lighthouse
+
+这是 Chrome 自带的本地版 [PageSpeed](https://pagespeed.web.dev)。在上图 2 「Network」 的同一栏，点击「Lighthouse」，然后点击「Analyze page load」，等待一会儿，就能看到你的网站的整体性能报告了。
+
+以下是本文在手机「Fast 3G」下的报告，其中有各项得分和有哪些优化点：
+
+{% include img.html src="image-optimization/report.png" alt="得分报告" width="300px" shape="narrow" %}
+
+注意，默认是不会应用上一节配置的手机「Fast 3G」，你需要打开 「Lighthouse」的 「DevTools throttling (advanced)」配置。我这篇文章如果不打开，那么性能得分会显示红色感叹号，估计是太快了（笑）。
 
 <br/>
 
