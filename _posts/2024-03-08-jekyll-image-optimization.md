@@ -257,3 +257,19 @@ fi
 - CSS 太难了😭
 
     {% include img.html src="image-optimization/IMG_2354.JPG" alt="CSS 太难了😭" width="500px" %}
+
+<script src="https://giscus.app/client.js"
+        data-repo="thearas/thearas.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODE0MDMxMjQ="
+        data-category="Announcements"
+        data-category-id="DIC_kwDOEMXe9M4CdtMV"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
