@@ -9,7 +9,7 @@ image_dir="${1:-$base_image_dir}"
 
 # Environments:
 resize="$RESIZE"
-output_ext=""
+output_ext=".webp"
 if [ -n "$OUTPUT_FMT" ]; then
     output_ext=".$(echo $OUTPUT_FMT | tr '[:upper:]' '[:lower:]')"
 fi
@@ -73,10 +73,12 @@ opt_main() {
     fi
 
     # check is image
+    set +e
     is_img=$(file --mime-type "$img" | awk -F ': ' '{print $NF}' | grep 'image')
     if [ -z "$is_img" ]; then
         return
     fi
+    set -e
 
     fetch_metadata
     echo "$img: $width x $height, $quality, $interlace, $format, $class"
@@ -103,14 +105,18 @@ opt_main() {
     elif ((smallest_dimension > 1920)); then
         args="$args -resize $(((1920 * 100) / smallest_dimension))%"
     fi
-    if ((quality > 88)) && [ "$format" != "PNG" ]; then
-        args='-quality 80'
+    if ((quality > 93)) && [ "$format" != "PNG" ]; then
+        if [ "$output_ext" == ".webp" ]; then
+            args="$args -quality 70 -define webp:lossless=false -define webp:use-sharp-yuv=1 -define webp:thread-level=1 -define webp:auto-filter=true -define webp:method=6 -define webp:image-hint=photo -define webp:alpha-compression=1 -define webp:alpha-filtering=2"
+        else
+            args="$args -quality 80"
+        fi
     fi
     if [[ "$interlace" == "None" ]] && [[ -z "$output_ext" ]]; then
         force_imagemagick=1
     fi
     if [ -n "$args" ] || [ $force_imagemagick -eq 1 ]; then
-        args="-strip -enhance -auto-level -auto-orient -interlace Plane $args"
+        args="-strip -auto-orient -enhance -interlace Plane $args"
         echo "convert $img $args $img_tmp"
         convert "$img" $args "$img_tmp"
         post_converted "$img_tmp" $force_imagemagick
