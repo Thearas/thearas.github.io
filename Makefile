@@ -9,7 +9,7 @@ install:
 	bundle
 
 run:
-	bundle exec jekyll serve
+	bundle exec jekyll serve --incremental
 
 index:
 	ALGOLIA_API_KEY=$(ALGOLIA_API_KEY) bundle exec jekyll algolia

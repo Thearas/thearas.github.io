@@ -1,6 +1,6 @@
 ---
 layout: posts
-categories: 旅行
+categories: travel
 title: 白色武功山
 excerpt: 得知心心念念的武功山 2 月飘雪，我和小伙伴们立刻决定去看看
 header:

@@ -1,6 +1,6 @@
 ---
 layout: posts
-categories: 技术
+categories: tech
 title: Image loading optimization for Jekyll and GitHub Page 
 excerpt: 常听前端同学自嘲切图仔，这次我也当一回
 header:

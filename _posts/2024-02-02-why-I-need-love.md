@@ -1,6 +1,6 @@
 ---
 layout: posts
-categories: 日常
+categories: daily
 title: 我为什么需要爱情
 excerpt: 最近我想恋爱了，但当朋友问我择偶要求时，我却答不上来
 header:
